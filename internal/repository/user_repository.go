@@ -28,7 +28,7 @@ func NewUser(opt ROption) IUser {
 func (m *user) GetDetail(ctx context.Context, id int) (user model.User, err error) {
 	db := m.opt.Common.Database.Read
 
-	row := db.QueryRowContext(ctx, "SELECT id, email, password, name, phone, created_at, updated_at FROM db_fithub.`user` WHERE id = ?", id)
+	row := db.QueryRowContext(ctx, "SELECT id, email, password, name, phone, created_at, updated_at FROM user WHERE id = ?", id)
 
 	err = row.Scan(&user.Id, &user.Email, &user.Password, &user.Name, &user.Phone, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
@@ -44,7 +44,7 @@ func (m *user) GetDetail(ctx context.Context, id int) (user model.User, err erro
 func (m *user) GetByEmail(ctx context.Context, email string) (user model.User, err error) {
 	db := m.opt.Common.Database.Read
 
-	row := db.QueryRowContext(ctx, "SELECT id, email, password, name, phone, created_at, updated_at FROM db_fithub.`user` WHERE email = ?", email)
+	row := db.QueryRowContext(ctx, "SELECT id, email, password, name, phone, created_at, updated_at FROM user WHERE email = ?", email)
 
 	err = row.Scan(&user.Id, &user.Email, &user.Password, &user.Name, &user.Phone, &user.CreatedAt, &user.UpdatedAt)
 
@@ -56,7 +56,7 @@ func (m *user) Create(ctx context.Context, user *model.User) (err error) {
 
 	_, err = db.ExecContext(
 		ctx,
-		"INSERT INTO db_fithub.`user` (email, password, name, phone, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+		"INSERT INTO user (email, password, name, phone, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
 		user.Email, user.Password, user.Name, user.Phone, user.CreatedAt, user.UpdatedAt,
 	)
 
