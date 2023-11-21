@@ -14,4 +14,5 @@ type SOption struct {
 // Services all service object injected here
 type Services struct {
 	Auth IAuthService
+	Task ITaskService
 }

@@ -47,12 +47,6 @@ func (m *user) GetByEmail(ctx context.Context, email string) (user model.User, e
 	row := db.QueryRowContext(ctx, "SELECT id, email, password, name, phone, created_at, updated_at FROM db_fithub.`user` WHERE email = ?", email)
 
 	err = row.Scan(&user.Id, &user.Email, &user.Password, &user.Name, &user.Phone, &user.CreatedAt, &user.UpdatedAt)
-	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return user, fmt.Errorf("user with email %s not found", email)
-		}
-		return user, fmt.Errorf("error scanning user details: %v", err)
-	}
 
 	return user, nil
 }

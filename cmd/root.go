@@ -117,9 +117,11 @@ func start() {
 
 func wiringRepository(repoOption repository.ROption) *repository.Repository {
 	user := repository.NewUser(repoOption)
+	task := repository.NewTask(repoOption)
 
 	repo := repository.Repository{
 		User: user,
+		Task: task,
 	}
 
 	return &repo
@@ -127,9 +129,11 @@ func wiringRepository(repoOption repository.ROption) *repository.Repository {
 
 func wiringService(serviceOption service.SOption) *service.Services {
 	auth := service.NewAuthService(serviceOption)
+	task := service.NewTaskService(serviceOption)
 
 	svc := service.Services{
 		Auth: auth,
+		Task: task,
 	}
 
 	return &svc

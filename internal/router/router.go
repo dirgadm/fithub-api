@@ -34,6 +34,8 @@ func Router(opt common.Options, services *service.Services) *echo.Echo {
 	// setup echo for gzip compres
 	e.Use(middleware.Gzip())
 
+	e.Use(middleware.Logger())
+
 	// setup echo for recover
 	if !opt.Config.App.Debug {
 		e.Use(middleware.Recover())

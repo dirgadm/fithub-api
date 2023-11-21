@@ -10,4 +10,5 @@ type ROption struct {
 // Repository all repo object injected here
 type Repository struct {
 	User IUser
+	Task ITask
 }
